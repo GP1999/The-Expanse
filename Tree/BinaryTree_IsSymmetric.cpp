@@ -44,6 +44,44 @@ bool isSymmetric(Node *tree1,Node *tree2)
     return i1&&i2;
 
 }
+bool isSymmetric_iterative(Node *root)
+{
+    if(!root)
+        return true;
+    if(!root->left && !root->right)
+        return true;
+    queue<Node*>q;
+    Node *tree1,*tree2;
+    q.push(root);
+    q.push(root);
+    while(!q.empty())
+    {
+        tree1=q.front();
+        q.pop();
+        tree2=q.front();
+        q.pop();
+        if(tree1->x!=tree2->x)
+            return false;
+        if(tree1->left&&tree2->right)
+        {
+            q.push(tree1->left);
+            q.push(tree2->right);
+        }
+        else if(tree1->left||tree2->right)
+            return false;
+        if(tree1->right&&tree2->left)
+        {
+            q.push(tree1->right);
+            q.push(tree2->left);
+        }
+        else if(tree1->right||tree2->left)
+            return false;
+
+
+
+    }
+    return true;
+}
 int main()
 {
     int r;
